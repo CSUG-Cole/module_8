@@ -16,6 +16,15 @@ public class Automobile {
     /* Default constructor */
     public Automobile() { /* Members already initialized */ }
 
+    /* 'Clone' constructor */
+    public Automobile(Automobile auto) {
+        this.make = auto.make;
+        this.model = auto.model;
+        this.year = auto.year;
+        this.color = auto.color;
+        this.mileage = auto.mileage;
+    }
+
     /* Checking for invalid years */
     private boolean yearIsLow(int year) { return year < 0; }
     private boolean yearIsHigh(int year) { return year > VALID_YEAR; }

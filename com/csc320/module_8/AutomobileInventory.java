@@ -67,8 +67,54 @@ public class AutomobileInventory {
         printPrompt();
     }
 
-    private static void handleAdd(Scanner scanner) {
-        System.out.println("Handling inventory add.");
+    private static String getResponse(Scanner scanner, String prompt) throws CancelException {
+        System.out.print(prompt);
+        try {
+            String response = scanner.next();
+            if (response.toLowerCase().equals("cancel")) {
+                throw new CancelException();
+            }
+            return response;
+        } catch (NoSuchElementException | IllegalStateException e) {
+            /* NoSuchElementException - if no more tokens are available
+             * IllegalStateException - if this scanner is closed
+             */
+            System.out.println(e.getMessage());
+            System.out.println("ERROR: Failed to scan next token. Exiting.");
+            System.exit(-1);
+        }
+        return "";
+    }
+
+    private static String getResponseString(Scanner scanner, String prompt) throws CancelException {
+        return getResponse(scanner, prompt);
+    }
+
+    private static int getResponseInt(Scanner scanner, String prompt, String errorMsg)
+        throws CancelException
+    {
+        String response = getResponse(scanner, prompt);
+        try {
+            return Integer.parseInt(response);
+        } catch (NumberFormatException e) {
+            System.out.println(errorMsg + String.format("'%s'.", response));
+        }
+        return getResponseInt(scanner, prompt, errorMsg);
+    }
+
+    private static void handleAdd(Scanner scanner) throws CancelException {
+        System.out.println("Adding automobile to inventory:");
+        String make = getResponseString(scanner, "Please enter the automobile make: ");
+        String model = getResponseString(scanner, "Please enter the automobile model: ");
+        int year = getResponseInt(
+            scanner, "Please enter the automobile year: ", "Year must be an integer. Got "
+        );
+        String color = getResponseString(scanner, "Please enter the automobile color: ");
+        int mileage = getResponseInt(
+            scanner, "Please enter the automobile mileage: ", "Mileage must be an integer. Got "
+        );
+        Automobile auto = new Automobile(make, model, year, color, mileage);
+        addAutomobile(auto);
     }
 
     private static void handleList() {

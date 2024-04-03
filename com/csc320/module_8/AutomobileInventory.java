@@ -97,7 +97,7 @@ public class AutomobileInventory {
         try {
             return Integer.parseInt(response);
         } catch (NumberFormatException e) {
-            System.out.println(errorMsg + String.format("'%s'.", response));
+            System.out.println(errorMsg + String.format(" Got '%s'.", response));
         }
         return getResponseInt(scanner, prompt, errorMsg);
     }
@@ -111,21 +111,41 @@ public class AutomobileInventory {
         );
         String color = getResponseString(scanner, "Please enter the automobile color: ");
         int mileage = getResponseInt(
-            scanner, "Please enter the automobile mileage: ", "Mileage must be an integer. Got "
+            scanner, "Please enter the automobile mileage: ", "Mileage must be an integer."
         );
         Automobile auto = new Automobile(make, model, year, color, mileage);
         addAutomobile(auto);
     }
 
-    private static void handleList() {
-        System.out.println("Automobile inventory:");
+    private static void printInventory() {
         for (int i = 0; i < inventory.size(); i++) {
             System.out.println(String.format("%03d", i) + ": " + inventory.get(i).toString());
         }
     }
 
+    private static void handleList() {
+        System.out.println("Automobile inventory:");
+        printInventory();
+    }
+
     private static void handleRemove(Scanner scanner) throws CancelException {
-        System.out.println("Handling inventory removal.");
+        printInventory();
+        int index = -1;
+        do {
+            index = getResponseInt(
+                scanner,
+                "Please enter the automobile index to remove: ",
+                "Automobile index must be an integer."
+            );
+            if (index < 0 || index > inventory.size() - 1) {
+                System.out.println(
+                    "ERROR: Index" + String.format(" '%03d' ", index) + "is out of bounds. " +
+                    "Must be between 0 and" + String.format(" %03d.", inventory.size())
+                );
+            }
+        } while (index < 0 || index > inventory.size() - 1);
+        Automobile auto = inventory.remove(index);
+        System.out.println("Removed automobile: " + auto.toString());
     }
 
     private static void handleSave() {

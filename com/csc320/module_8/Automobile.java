@@ -88,7 +88,7 @@ public class Automobile {
         System.out.println("Model:   '" + this.model + "'");
         System.out.println("Year:    " + this.year);
         System.out.println("Color:   '" + this.color + "'");
-        System.out.println("Mileage: " + this.mileage + "mile(s)");
+        System.out.println("Mileage: " + this.mileage + " mile(s)");
     }
 
     /* Simple oneliner printing */

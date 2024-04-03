@@ -1,5 +1,7 @@
 package com.csc320.module_8;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -117,10 +119,16 @@ public class AutomobileInventory {
         addAutomobile(auto);
     }
 
-    private static void printInventory() {
+    private static String getInventoryAsString() {
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < inventory.size(); i++) {
-            System.out.println(String.format("%03d", i) + ": " + inventory.get(i).toString());
+            builder.append(String.format("%03d", i) + ": " + inventory.get(i).toString() + "\n");
         }
+        return builder.toString();
+    }
+
+    private static void printInventory() {
+        System.out.print(getInventoryAsString());
     }
 
     private static void handleList() {
@@ -149,7 +157,13 @@ public class AutomobileInventory {
     }
 
     private static void handleSave() {
-        System.out.println("Handling inventory save.");
+        try (PrintWriter printWriter = new PrintWriter("Autos.txt")) {
+            printWriter.println("Automobile Inventory.");
+            printWriter.print(getInventoryAsString());
+            System.out.println("Inventory has been saved to Autos.txt");
+        } catch (IOException e) {
+            System.out.println("ERROR: An error occurred while saving inventory to Autos.txt: " + e.getMessage());
+        }
     }
 
     private static void handleCommand(String command, Scanner scanner) {

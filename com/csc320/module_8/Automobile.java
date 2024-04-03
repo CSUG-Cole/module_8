@@ -90,4 +90,12 @@ public class Automobile {
         System.out.println("Color: '" + this.color + "'");
         System.out.println("Mileage: " + this.mileage);
     }
+
+    /* Simple oneliner printing */
+    public String toString() {
+        return new String(
+            this.year + " " + this.color + " " + this.make + " " + this.model +
+            " with " + String.format("%,d", this.mileage) + " mile(s)"
+        );
+    }
 }

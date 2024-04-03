@@ -35,7 +35,7 @@ public class AutomobileInventory {
         boolean result = inventory.add(new Automobile(auto));
 
         if (result) {
-            System.out.print("Successfully added automobile to inventory.");
+            System.out.println("Successfully added automobile to inventory.");
             auto.printDetails();
         } else {
             System.out.println("Failed to add automobile to inventory.");
@@ -88,9 +88,11 @@ public class AutomobileInventory {
                 handleSave();
                 break;
             default:
-                System.out.println("WARNING: Got invalid command string: '" + command + "'");
+                System.out.println("WARNING: Got an invalid command: '" + command + "'");
+                printAvailableCommands();
                 break;
         }
+        printPrompt();
     }
 
     private static void runInventoryLoop() {
@@ -114,7 +116,10 @@ public class AutomobileInventory {
             }
 
             /* If user wants to quit handle that here. */
-            if (command.toLowerCase().equals("quit")) break;
+            if (command.toLowerCase().equals("quit")) {
+                System.out.println("Goodbye!");
+                break;
+            }
 
             handleCommand(command, scanner);
         }

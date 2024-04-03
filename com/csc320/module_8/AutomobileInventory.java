@@ -62,9 +62,25 @@ public class AutomobileInventory {
 
     private static void printGreeting() {
         System.out.println("Hello! This program will help you manage your automobile inventory.");
-        System.out.println("Please see the list of available commands below to get started!");
+        System.out.println("Please see the list of commands available below to get started!");
         printAvailableCommands();
         printPrompt();
+    }
+
+    private static void handleAdd(Scanner scanner) {
+        System.out.println("Handling inventory add.");
+    }
+
+    private static void handleList() {
+        System.out.println("Handling inventory list.");
+    }
+
+    private static void handleRemove(Scanner scanner) {
+        System.out.println("Handling inventory removal.");
+    }
+
+    private static void handleSave() {
+        System.out.println("Handling inventory save.");
     }
 
     private static void handleCommand(String command, Scanner scanner) {

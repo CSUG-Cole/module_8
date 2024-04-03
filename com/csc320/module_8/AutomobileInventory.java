@@ -41,18 +41,18 @@ public class AutomobileInventory {
             System.out.println("Failed to add automobile to inventory.");
             auto.printDetails();
         }
-
-        return result;
     }
 
     private static void printAvailableCommands() {
         System.out.println("Available Commands:");
         System.out.println("add:     Begin adding a new automobile to the inventory.");
+        System.out.println("cancel:  You can call the cancel command to end an add or " +
+                                    "remove operation.");
         System.out.println("help:    Display this help message.");
         System.out.println("list:    Display a numbered list of automobiles in the inventory.");
         System.out.println("quit:    Quit the program.");
         System.out.println("remove:  Begin removing an automobile from the inventory.");
-        System.out.println("save:    Save the contents of the inventory to the file 'Autos.txt'" +
+        System.out.println("save:    Save the contents of the inventory to the file 'Autos.txt' " +
                                     "in the current directory.");
     }
 
@@ -78,7 +78,7 @@ public class AutomobileInventory {
         }
     }
 
-    private static void handleRemove(Scanner scanner) {
+    private static void handleRemove(Scanner scanner) throws CancelException {
         System.out.println("Handling inventory removal.");
     }
 
@@ -87,31 +87,39 @@ public class AutomobileInventory {
     }
 
     private static void handleCommand(String command, Scanner scanner) {
-        switch (command.toLowerCase()) {
-            case "add":
-                handleAdd(scanner);
-                break;
-            case "help":
-                printAvailableCommands();
-                break;
-            case "list":
-                handleList();
-                break;
-            case "quit":
-                /* handled in main event loop */
-                break;
-            case "remove":
-                handleRemove(scanner);
-                break;
-            case "save":
-                handleSave();
-                break;
-            default:
-                System.out.println("WARNING: Got an invalid command: '" + command + "'");
-                printAvailableCommands();
-                break;
+        try {
+            switch (command.toLowerCase()) {
+                case "add":
+                    handleAdd(scanner);
+                    break;
+                case "cancel":
+                    System.out.println(
+                        "WARNING: The cancel command is only valid during an add or remove operation."
+                    );
+                    break;
+                case "help":
+                    printAvailableCommands();
+                    break;
+                case "list":
+                    handleList();
+                    break;
+                case "quit":
+                    /* handled in main event loop */
+                    break;
+                case "remove":
+                    handleRemove(scanner);
+                    break;
+                case "save":
+                    handleSave();
+                    break;
+                default:
+                    System.out.println("WARNING: Got an invalid command: '" + command + "'");
+                    printAvailableCommands();
+                    break;
+            }
+        } catch (CancelException e) {
+            System.out.println("Cancelling " + command.toLowerCase() + "...");
         }
-        printPrompt();
     }
 
     private static void runInventoryLoop() {
@@ -141,6 +149,7 @@ public class AutomobileInventory {
             }
 
             handleCommand(command, scanner);
+            printPrompt();
         }
 
         scanner.close();

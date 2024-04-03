@@ -72,7 +72,10 @@ public class AutomobileInventory {
     }
 
     private static void handleList() {
-        System.out.println("Handling inventory list.");
+        System.out.println("Automobile inventory:");
+        for (int i = 0; i < inventory.size(); i++) {
+            System.out.println(String.format("%03d", i) + ": " + inventory.get(i).toString());
+        }
     }
 
     private static void handleRemove(Scanner scanner) {

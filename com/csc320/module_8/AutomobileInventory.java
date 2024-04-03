@@ -39,6 +39,34 @@ public class AutomobileInventory {
             System.out.println("Failed to add automobile to inventory.");
             auto.printDetails();
         }
+
         return result;
+    }
+
+    private static void printAvailableCommands() {
+        System.out.println("Available Commands:");
+        System.out.println("add:     Begin adding a new automobile to the inventory.");
+        System.out.println("help:    Display this help message.");
+        System.out.println("list:    Display a numbered list of automobiles in the inventory.");
+        System.out.println("quit:    Quit the program.");
+        System.out.println("remove:  Begin removing an automobile from the inventory.");
+        System.out.println("save:    Save the contents of the inventory to the file 'Autos.txt'" +
+                                    "in the current directory.");
+    }
+
+    private static void printPrompt() {
+        System.out.print("> ");
+    }
+
+    private static void printGreeting() {
+        System.out.println("Hello! This program will help you manage your automobile inventory.");
+        System.out.println("Please see the list of available commands below to get started!");
+        printAvailableCommands();
+        printPrompt();
+    }
+
+    private static void runInventoryLoop() {
+        boolean running = true;
+        printGreeting();
     }
 }

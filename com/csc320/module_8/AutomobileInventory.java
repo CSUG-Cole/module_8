@@ -2,6 +2,8 @@ package com.csc320.module_8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class AutomobileInventory {
     /* This list will hold the inventory of the program */
@@ -65,8 +67,58 @@ public class AutomobileInventory {
         printPrompt();
     }
 
+    private static void handleCommand(String command, Scanner scanner) {
+        switch (command.toLowerCase()) {
+            case "add":
+                handleAdd(scanner);
+                break;
+            case "help":
+                printAvailableCommands();
+                break;
+            case "list":
+                handleList();
+                break;
+            case "quit":
+                /* handled in main event loop */
+                break;
+            case "remove":
+                handleRemove(scanner);
+                break;
+            case "save":
+                handleSave();
+                break;
+            default:
+                System.out.println("WARNING: Got invalid command string: '" + command + "'");
+                break;
+        }
+    }
+
     private static void runInventoryLoop() {
-        boolean running = true;
+        Scanner scanner = new Scanner(System.in);
         printGreeting();
+
+        /* Main event loop to respond to user commands. */
+        while (true) {
+            String command = "";
+
+            /* Try to get the next token. */
+            try {
+                command = scanner.next();
+            } catch (NoSuchElementException | IllegalStateException e) {
+                /* NoSuchElementException - if no more tokens are available
+                 * IllegalStateException - if this scanner is closed
+                 */
+                 System.out.println(e.getMessage());
+                 System.out.println("ERROR: Failed to scan next token. Exiting.");
+                 System.exit(-1);
+            }
+
+            /* If user wants to quit handle that here. */
+            if (command.toLowerCase().equals("quit")) break;
+
+            handleCommand(command, scanner);
+        }
+
+        scanner.close();
     }
 }

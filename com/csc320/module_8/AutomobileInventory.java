@@ -30,7 +30,7 @@ public class AutomobileInventory {
     }
 
     /* Method to add an automobile to the class inventory */
-    private static boolean addAutomobile(Automobile auto) {
+    private static void addAutomobile(Automobile auto) {
         /* Store the result to return later and check for errors */
         boolean result = inventory.add(new Automobile(auto));
 

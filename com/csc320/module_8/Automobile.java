@@ -84,11 +84,11 @@ public class Automobile {
 
     /* Print Automobile details to the console */
     public void printDetails() {
-        System.out.println("Make: '" + this.make + "'");
-        System.out.println("Model: '" + this.model + "'");
-        System.out.println("Year: " + this.year);
-        System.out.println("Color: '" + this.color + "'");
-        System.out.println("Mileage: " + this.mileage);
+        System.out.println("Make:    '" + this.make + "'");
+        System.out.println("Model:   '" + this.model + "'");
+        System.out.println("Year:    " + this.year);
+        System.out.println("Color:   '" + this.color + "'");
+        System.out.println("Mileage: " + this.mileage + "mile(s)");
     }
 
     /* Simple oneliner printing */

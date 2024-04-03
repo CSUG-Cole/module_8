@@ -15,7 +15,7 @@ public class AutomobileInventory {
         Automobile customAuto = new Automobile("Toyota", "Tacoma", 1999, "Silver", 80_000);
 
         /* Fill the inventor with default automobiles */
-        if (addAutomobile(defaultAuto) || addAutomobile(customAuto)) {
+        if (!inventory.add(defaultAuto) || ! inventory.add(customAuto)) {
             System.out.println("ERROR: Failed to initialize AutomobileInventory. Exiting.");
             System.exit(-1); /* -1 to indicate an error with the program */
         }

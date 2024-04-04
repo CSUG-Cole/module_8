@@ -28,6 +28,6 @@ remove  # Begin removing an automobile from the inventory.
 save    # Save the contents of the inventory to the file 'Autos.txt' in the current directory.
 ```
 
-## Demo
+## Demo (Watch in fullscreen)
 
-
+[demo.webm](https://github.com/CSUG-Cole/module_8/assets/146023803/1c941e79-9164-4fc6-8a1a-d050368bdaa3)

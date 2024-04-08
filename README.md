@@ -30,4 +30,5 @@ save    # Save the contents of the inventory to the file 'Autos.txt' in the curr
 
 ## Demo (Watch in fullscreen)
 
-[demo.webm](https://github.com/CSUG-Cole/module_8/assets/146023803/1c941e79-9164-4fc6-8a1a-d050368bdaa3)
+
+[demo.mp4](https://github.com/CSUG-Cole/module_8/assets/146023803/ea68d65e-289e-4a06-9637-e681352cce4c)
